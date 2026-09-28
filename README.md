@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # GitHub Test Intelligence
 
 A test intelligence tool that collects automated test results from GitHub Actions and converts them into a normalized format for analysis, history, and future flaky-test detection.
@@ -56,3 +57,6 @@ type TestRun = {
   };
   tests: TestResult[];
 };
+=======
+# GitHub-Test-Intelligence-TGS
+>>>>>>> df366178bd0b5d650cd3d78d0f406e4d7cf0bdeb

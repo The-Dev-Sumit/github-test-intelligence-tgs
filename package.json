@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "parse": "tsx src/parse-cli.ts",
-    "test": "vitest run"
+    "test": "vitest run",
+    "build:action": "ncc build action/index.ts -o action/dist"
   },
   "type": "module",
   "keywords": [],
@@ -17,8 +18,9 @@
   },
   "devDependencies": {
     "@types/node": "^26.6.3",
+    "@vercel/ncc": "^0.45.0",
     "tsx": "^4.23.15",
-    "typescript": "^7.0.2",
+    "typescript": "^5.9.3",
     "vitest": "^5.0.2"
   }
 }

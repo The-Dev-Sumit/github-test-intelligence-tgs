@@ -1,0 +1,12 @@
+name: GitHub Test Intelligence TGS
+description: Parse and collect automated test results
+author: Sumit Sonar
+
+inputs:
+  results-path:
+    description: Path to the JUnit XML test result file
+    required: true
+
+runs:
+  using: node20
+  main: dist/index.js
