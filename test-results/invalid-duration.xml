@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuites>
+  <testsuite name="Authentication Tests">
+    <testcase
+      name="login works"
+      classname="auth"
+      time="invalid"
+    />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuites>
+  <testsuite name="Authentication Tests">
+    <testcase name="login works" classname="auth" time="0.12">
+      <failure message="Login failed">
+        Expected login to succeed but it failed
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuites name="Example Test Run">
+
+  <testsuite
+    name="Authentication Tests"
+    tests="4"
+    failures="1"
+    skipped="0"
+    time="0.25"
+  >
+
+    <testcase
+      classname="auth"
+      name="login works"
+      time="0.12"
+    />
+
+    <testcase
+      classname="auth"
+      name="logout works"
+      time="0.08"
+    >
+      <failure message="Expected 200 but got 401">
+        Expected 200 but got 401
+      </failure>
+    </testcase>
+
+    <testcase
+      classname="auth"
+      name="session expires"
+      time="0.05"
+    />
+
+    <testcase
+    classname="auth"
+    name="duration missing"
+  />
+
+  <testcase
+  classname="auth"
+  name="invalid duration"
+  time="abc"
+/>
+
+
+  </testsuite>
+
+  <testsuite
+    name="User Tests"
+    tests="3"
+    failures="0"
+    skipped="1"
+    time="0.20"
+  >
+
+    <testcase
+      classname="user"
+      name="profile works"
+      time="0.05"
+    />
+
+    <testcase
+      classname="user"
+      name="update profile works"
+      time="0.10"
+    />
+
+    <testsuite name="Empty Suite" tests="0" failures="0" skipped="0" time="0" />
+
+    <testcase
+      classname="user"
+      name="delete account works"
+      time="0.05"
+    >
+      <skipped />
+    </testcase>
+
+  </testsuite>
+
+</testsuites>

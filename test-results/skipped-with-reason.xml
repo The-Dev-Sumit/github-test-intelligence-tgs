@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<testsuites>
+  <testsuite name="User Tests">
+    <testcase name="delete account" classname="user" time="0.05">
+      <skipped reason="Feature not ready" />
+    </testcase>
+  </testsuite>
+</testsuites>
