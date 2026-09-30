@@ -23,4 +23,12 @@ export type TestRun = {
     summary: TestSummary;
     tests: TestResult[];
 };
+export type GitHubActionPayload = {
+    repository: string;
+    commitSha: string;
+    branch: string;
+    workflow: string;
+    runId: string;
+    testRun: TestRun;
+};
 //# sourceMappingURL=types.d.ts.map

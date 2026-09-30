@@ -1,9 +1,20 @@
+import type { GitHubActionPayload } from "../src/types.js";
 import { parseJUnitFile } from "../src/parser.js";
 
 const resultsPath = process.env["INPUT_RESULTS-PATH"];
+const apiUrl = process.env["INPUT_API-URL"];
+const apiKey = process.env["INPUT_API-KEY"];
 
 if (!resultsPath) {
   throw new Error("results-path input is required");
+}
+
+if (!apiUrl) {
+  throw new Error("api-url input is required");
+}
+
+if (!apiKey) {
+  throw new Error("api-key input is required");
 }
 
 const testRun = await parseJUnitFile(resultsPath);
@@ -34,7 +45,7 @@ if (!runId) {
   throw new Error("GITHUB_RUN_ID is not available");
 }
 
-const payload = {
+const payload: GitHubActionPayload = {
   repository,
   commitSha,
   branch,
@@ -43,4 +54,34 @@ const payload = {
   testRun,
 };
 
-console.log(JSON.stringify(payload, null, 2));
+async function sendTestRun(
+  apiUrl: string,
+  apiKey: string,
+  payload: GitHubActionPayload,
+) {
+  const response = await fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+
+    throw new Error(
+      `Failed to send test results: ${response.status} ${response.statusText} - ${errorBody}`,
+    );
+  }
+
+  const result = await response.json();
+
+  return result;
+}
+
+const result = await sendTestRun(apiUrl, apiKey, payload);
+
+console.log("Test results sent successfully.");
+console.log("Test run ID:", result.testRunId);

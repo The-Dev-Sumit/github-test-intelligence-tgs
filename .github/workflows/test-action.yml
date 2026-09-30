@@ -17,3 +17,5 @@ jobs:
         uses: ./action
         with:
           results-path: ./test-results/example.xml
+          api-url: ${{ secrets.TEST_INTELLIGENCE_API_URL }}
+          api-key: ${{ secrets.TEST_INTELLIGENCE_API_KEY }}

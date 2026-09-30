@@ -8,8 +8,16 @@ __nccwpck_require__.a(module, async (__webpack_handle_async_dependencies__, __we
 /* harmony import */ var _src_parser_js__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(366);
 
 const resultsPath = process.env["INPUT_RESULTS-PATH"];
+const apiUrl = process.env["INPUT_API-URL"];
+const apiKey = process.env["INPUT_API-KEY"];
 if (!resultsPath) {
     throw new Error("results-path input is required");
+}
+if (!apiUrl) {
+    throw new Error("api-url input is required");
+}
+if (!apiKey) {
+    throw new Error("api-key input is required");
 }
 const testRun = await (0,_src_parser_js__WEBPACK_IMPORTED_MODULE_0__/* .parseJUnitFile */ .c)(resultsPath);
 const repository = process.env.GITHUB_REPOSITORY;
@@ -40,7 +48,25 @@ const payload = {
     runId,
     testRun,
 };
-console.log(JSON.stringify(payload, null, 2));
+async function sendTestRun(apiUrl, apiKey, payload) {
+    const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+        const errorBody = await response.text();
+        throw new Error(`Failed to send test results: ${response.status} ${response.statusText} - ${errorBody}`);
+    }
+    const result = await response.json();
+    return result;
+}
+const result = await sendTestRun(apiUrl, apiKey, payload);
+console.log("Test results sent successfully.");
+console.log("Test run ID:", result.testRunId);
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);

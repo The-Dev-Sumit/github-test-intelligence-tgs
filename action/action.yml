@@ -7,6 +7,14 @@ inputs:
     description: Path to the JUnit XML test result file
     required: true
 
+  api-url:
+    description: URL of the GitHub Test Intelligence backend
+    required: true
+
+  api-key:
+    description: API key for authenticating with the backend
+    required: true
+
 runs:
   using: node20
   main: dist/index.js
