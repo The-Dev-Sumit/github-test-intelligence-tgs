@@ -25,6 +25,7 @@ const commitSha = process.env.GITHUB_SHA;
 const branch = process.env.GITHUB_REF_NAME;
 const workflow = process.env.GITHUB_WORKFLOW;
 const runId = process.env.GITHUB_RUN_ID;
+const runAttempt = process.env.GITHUB_RUN_ATTEMPT;
 if (!repository) {
     throw new Error("GITHUB_REPOSITORY is not available");
 }
@@ -40,12 +41,16 @@ if (!workflow) {
 if (!runId) {
     throw new Error("GITHUB_RUN_ID is not available");
 }
+if (!runAttempt) {
+    throw new Error("GITHUB_RUN_ATTEMPT is not available");
+}
 const payload = {
     repository,
     commitSha,
     branch,
     workflow,
     runId,
+    runAttempt,
     testRun,
 };
 async function sendTestRun(apiUrl, apiKey, payload) {
